@@ -2,6 +2,8 @@
 
 Script de Python para obtener imágenes de un listado de servicios de visualización de mapas (WMS)
 
+<iframe src="//giphy.com/embed/l2SqaIg0lAiLIrMYM" width="480" height="495" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/spain-cordoba-wms-l2SqaIg0lAiLIrMYM">via GIPHY</a></p>
+
 Más información en la entrada de SIGdeletras http://sigdeletras.com/
 
 El script esta testeado en Python 3.5.1+. 
