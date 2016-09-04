@@ -1,12 +1,12 @@
 # wms2image
 
-Script de Python para obtener un conjunto de imágenes (Getmap) de un listado de servicios WMS de un rectángulo geográfico definido mediante par de coordendas en un EPSG UTM.
+Script de Python para obtener un conjunto de imágenes (Getmap) de un listado de servicios WMS a partir d de un rectángulo geográfico definido mediante par de coordendas UTM.
 
-<iframe src="//giphy.com/embed/l2SqaIg0lAiLIrMYM" width="480" height="495" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="http://giphy.com/gifs/spain-cordoba-wms-l2SqaIg0lAiLIrMYM">via GIPHY</a></p>
+![http://i.giphy.com/l2SqaIg0lAiLIrMYM.gif](http://i.giphy.com/l2SqaIg0lAiLIrMYM.gif)
 
 Más información en la entrada de SIGdeletras http://sigdeletras.com/
 
-El script esta testeado en Python 3.5.1+. 
+El script esta testeado en Python 3.5.1+.
 
 ## Requisitos
 - requests
@@ -74,4 +74,4 @@ Las coordendas se debe indicar en el siguiente order:
 
 IMG
 
-Una forma rápida de obtener estas coordendas en por ejemplo utilizar el SIG QGIS. 
+Una forma rápida de obtener estas coordendas en por ejemplo utilizar el SIG QGIS.
