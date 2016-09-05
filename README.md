@@ -15,7 +15,8 @@ El *script* está testeado en Python 3.5.1+.
 ## Requisitos
 
 Es necesario tener instalada la librería [requests](http://docs.python-requests.org/en/master/).
-M    pip install -r requirements.txt
+
+    pip install -r requirements.txt
 
 ## Instalación
 
@@ -29,7 +30,7 @@ Una vez obtenido el script, se puede usar el intérprete de Python por defecto o
 
 Ejemplo:
 
-    python wms2image.py wmslist/wmslist.csv 25830 "332401,4188300,341225,4193019" 800 tiff
+    python wms2image.py wmslist/pnoa.csv 25830 "332401,4188300,341225,4193019" 800 tiff
 
     import wms2image
     wms2image.wms2image('wmslist.csv, '25830','332401,4188300,341225,4193019','800','png')
@@ -49,6 +50,7 @@ Ejemplo:
 
 ## Crear nuevo listado de WMS
 
+En la carpeta [wmslist](wmslist) se pueden encontrar un par de ejemplos con listados de servicios WMS de ortofotografías.
 Para crear un listado de capas de WMS a usar podemos usar cualquier editor de texto. La estructura del archivo es sencilla. Para capa servicio se añadirá una file en el archivo que contenga la url del WMS y a continuación separado por como el nombre de la capa y por último el nombre con el que se guardará el fichero de imagen.
 
 Ej.
@@ -58,7 +60,6 @@ http://www.ign.es/wms/pnoa-historico,PNOA2005,2005_pnoa
 http://www.ign.es/wms/pnoa-historico,PNOA2006,2006_pnoa
 http://www.ign.es/wms/pnoa-historico,PNOA2007,2007_pnoa
 '''
-En la carpeta [wmslist](https://github.com/sigdeletras/wms2image/tree/master/wmslist) pueden encontrarse algunos ejemplos.
 
 Para obtener el listado de capas de un WMS puede consultarse los metadatos del servicio a través de la petición **GetCapabilities**.
 
@@ -77,11 +78,12 @@ Podemos obtener de forma rápida la caja de coordendas usando QGIS.
 
 ##2do
 
-- Porder usar coordendas no geográficas
+- Poder usar coordenadas sy SRC no geográficas (ej. 4326)
+- Generar archivos de georreferenciación de las imágenes ([world file](https://en.wikipedia.org/wiki/World_file)) para poder usarlas en GIS/CAD
 
 ##¿Cómo colaborar?
 
 - Usando el script
 - Compartiendo en Redes Sociales
-- Creando listados de WMS por provincias o municipios
+- Creando listados de WMS por provincias o municipios para añadirlos a la carpeta [wmslist](wmslist) del repositorio.
 - Indicando mejoras (issues, PR..)

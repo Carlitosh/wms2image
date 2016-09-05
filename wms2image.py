@@ -6,40 +6,29 @@ __author__ = [
 ]
 __license__ = 'GPLv3'
 
-"""Example Google style docstrings.
+"""Script Python para descarga de imágenes de un listado de servicios WMS usado GetMap.
 
 Descripción
 ===========
-El script genera un fichero GML de parcela catastral según las especificaciones de Castastro.
-Basado en https://github.com/sigdeletras/dxf2gmlcatastro (Patricio Soriano :: SIGdeletras.com)
+Script de Python para obtener un conjunto de imágenes (GetMap) de un listado de servicios WMS a partir de un rectángulo geográfico definido mediante par de coordenadas UTM.
 
-Especificaciones
-================
-    * http://www.catastro.minhap.gob.es/esp/formatos_intercambio.asp
-    * Cada parcela debe estar en una capa en cuyo nombre se establecerá su referencia.
-    * No se permiten incorporar en el mismo fichero dxf parcelas con referencias catastrales y referencias locales mezcladas, todas deben ser del mismo tipo, o bien locales o bien catastrales.
-    * Se asume referencia catastral si la longitud de la referencia es de 14 caracteres.
-    * Las geometrías deben ser sólidas y estar cerradas (el primer y último punto del polígono deben ser el mismo)
 Requisitos
 ==========
-Es necesario tener instalado Python y el módulo GDAL (python-gdal).
+Es necesario tener instalado Python y el módulo Requests.
+Puede ejecutarse e archivo requirements.txt mediate pip install -r requirements.txt
 
 Ejemplos de uso
 ===============
-    * python dxfgmlcatastro.py <parcela1.dxf>
-         generará el fichero parcela1.gml
-    * python dxfgmlcatastro.py <parcela1.dxf> 25831
-         generará el fichero parcela1.gml usando el código EPSG 25831
-    * python dxfgmlcatastro.py <mi_directorio>
-         generará un fichero .gml por cada fichero .dxf que se encuentre en mi_directorio
-
+    * python wms2image.py wmslist/pnoa.csv 25830 "332401,4188300,341225,4193019" 800 tiff
+         descarga las imágenes del listado ponoa.csv en formato tiff del área indicada
+    
 """
 
-import ast
-import csv
 import os
 import sys
 import requests
+import ast
+import csv
 
 try:
     import requests
@@ -98,12 +87,12 @@ def wms2image(csvfile, code, bbox, imgwidth, imgformat):
 
     bboxcoord = ast.literal_eval(bbox)
     imgheight = ((bboxcoord[3] - bboxcoord[1]) * int(imgwidth)) / (bboxcoord[2] - bboxcoord[0])
-
+    epgscode = str(code)
     for row in wmslist:
         wms = row[0]
         layer = row[1]
         file = row[2]
-        url = wms + '?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=' + layer + '&STYLES=&SRS=EPSG:' + str(code) + '&BBOX=' \
+        url = wms + '?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=' + layer + '&STYLES=&SRS=EPSG:' + epgscode + '&BBOX=' \
               + bbox + '&WIDTH=' + str(imgwidth) + '&HEIGHT=' + str(imgheight) + '&FORMAT=image/' + imgformat
 
         r = requests.get(url)
@@ -111,9 +100,14 @@ def wms2image(csvfile, code, bbox, imgwidth, imgformat):
             code.write(r.content)
 
         print("Downloading..." + file + "." + imgformat)
+        print(url)
 
 
 def usage():
+    print(u'\nEjemplo:')
+
+    print(u'\tpython wms2image.py wmslist/pnoa.csv 25830 "332401,4188300,341225,4193019" 800 tiff')
+   
     print(u'\nParámetros:')
 
     print(u'\t1. csvfile: nombre del archivo csv con el listado de servicios WMS')
